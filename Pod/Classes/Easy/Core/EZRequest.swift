@@ -95,7 +95,11 @@ public class EZRequest: NSObject {
     }
     
     public var requestParams :Dictionary<String,AnyObject>{
-        return self.listProperties()
+        var listProperties = self.listProperties()
+        for (k, v) in self.params {
+            listProperties.updateValue(v, forKey: k)
+        }
+        return listProperties
     }
     
     public var appendPathInfo :String {
